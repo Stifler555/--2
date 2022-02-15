@@ -118,41 +118,40 @@ while True:
     “ед”: [“шт.”]
 }
 
-goods = []
-features = {'name': '', 'price': '', 'quantity': '', 'unit': ''}
-analytics = {'name': [], 'price': [], 'quantity': [], 'unit': []}
-num = 0
-feature_ = None
-control = None
+
+product_struccture = {
+    "Название": str,
+    "Цена": int,
+    "Количество": int,
+    "Еденица измерения": str,
+}
+
+product_list = []
+product_counter = 1
+
 while True:
-    control = input("For quit press 'Q', for continue press 'Enter', for analytics press 'A'").upper()
-    if control == 'Q':
+    decision = input(f"Товаров = {len(product_lit)}, добавить? [y/n] ").lower()
+
+    if decision == 'n':
         break
-    num += 1
-    if control == 'A':
-        print(f'\n Current analytics \n {"-" * 30}')
-        for key, value in analytics.items():
-            print(f'{key[:25]:>30}: {value}')
-            print("-" * 30)
-    for f in features.keys():
-        feature_ = input(f'Input feature "{f}"')
-        features[f] = int(feature_) if (f == 'price' or f == 'quantity') else feature_
-        analytics[f].append(features[f])
-    goods.append((num, features))
+    else:
+        product_info = {}
 
+        for property_name, property_type in producct_structure.items():
+            user_input = input(f"Заполните поле '{property_name}' >>> ")
+            product_info[property_name] = property_type(user_input)
 
-goods = int(input("Введите количество товара "))
-n = 1
-my_dict = []
-my_list = []
-my_analys = {}
-while n <= goods:
-    my_dict = dict({'название': input("введите название "), 'цена': input("Введите цену "),
-                    'количество': input('Введите количество '), 'eд': input("Введите единицу измерения ")})
-    my_list.append((n, my_dict))
-    n += 1
-    my_analys = dict(
-        {'название': my_dict.get('название'), 'цена': my_dict.get('цена'), 'количество': my_dict.get('количество'),
-         'ед': my_dict.get('ед')})
-print(my_list)
-print(my_analys)
+        product_list.append((product_counter, product_info))
+        product_counter += 1
+
+    product_analytics = {}
+
+    for analytics_key in product_struccture.keys():
+        item_list = []
+
+        for product in product_list:
+            item_list.append(product[1][analytics_key])
+
+        product_analytics[analytics_key] = item_list
+
+    print(product_analytics)
