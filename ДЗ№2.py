@@ -4,13 +4,10 @@
 Элементы списка можно не запрашивать у пользователя,
 а указать явно, в программе.
 
+example_list = ["String", 10, 25.78, False, "True",[]]
 
-my_list = [12, None, -77, 'True', True, 9.5]
-def my_type(el):
-    for el in range(len(my_list)):
-        print(type(my_list[el]))
-    return
-my_type(my_list)
+for item in example_list:
+        print(type(item))
 
 
 
@@ -21,20 +18,15 @@ my_type(my_list)
 Для заполнения списка элементов необходимо использовать
 функцию input().
 
-el_count = int(input("Введите количество элементов списка "))
-my_list = []
-i = 0
-el = 0
-while i < el_count:
-    my_list.append(input("Введите следующее значение списка "))
-    i += 1
+items = input("Укажите значения списка через запятую >>>").split(",")
 
-for elem in range(int(len(my_list)/2)):
-        my_list[el], my_list[el + 1] = my_list [el + 1], my_list[el]
-        el += 2
-print(my_list)
+max_idx = len(items) - 1
 
+for idx in range(0, max_idx, 2):
+    next_idx = idx + 1
+    items[idx], items[next_idx] = items[next_idx], items[idx]
 
+print(items)
 
 
 3. Пользователь вводит месяц в виде целого числа от 1 до 12.
@@ -42,24 +34,18 @@ print(my_list)
 лето, осень).
 Напишите решения через list и через dict.
 
-seasons_list = ['winter', 'spring', 'summer', 'autumn']
-seasons_dict = {1 : 'winter', 2 : 'spring', 3 : 'summer', 4 : 'autumn'}
-month = int(input("Введите месяц по номеру "))
-if month ==1 or month == 12 or month == 2:
-        print(seasons_dict.get(1))
-        print(seasons_list[0])
-elif month == 3 or month == 4 or month ==5:
-    print(seasons_dict.get(2))
-    print(seasons_list[1])
-elif month == 6 or month == 7 or month == 8:
-    print(seasons_dict.get(3))
-    print(seasons_list[2])
+month = int(input("Укажите номер месяца >>>"))
 
-elif month == 9 or month == 10 or month == 11:
-    print(seasons_dict.get(4))
-    print(seasons_list[3])
-else:
-        print("Такого месяца не существует")
+year_dict = {
+    "Зима": (12, 1, 2),
+    "Весна": (3, 4, 5),
+    "Лето": (6, 7, 8),
+    "Осень": (9, 10, 11),
+}
+
+for season, months in year_dict.items():
+    if month in months:
+        print(f"Время года = {season}")
 
 
 
